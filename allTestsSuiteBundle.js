@@ -2364,9 +2364,13 @@ const crazySuite = Suite("crazy");
 
 crazySuite.add("equals", assert => {
 
-    // assert.is( a == b, );
-    // assert.is( b == c, );
-    // assert.is( a == c, );
+    const a = "0";
+    const b =  0;
+    const c = [];
+
+    assert.is( a == b, true );
+    assert.is( b == c, true);
+    assert.is( a == c, false );
 });
 
 crazySuite.add("false", assert => {
@@ -2383,16 +2387,19 @@ crazySuite.add("coercion", assert => {
     assert.true( "1"   == 1     );
     assert.true( +"2"  == 2     );
     assert.true( !"0"  == false );
+    assert.true( "0"   == false );
     assert.true( !!"0" == true  );
     assert.is  ( Number("0"), 0 );
 });
 
 crazySuite.add("object", assert => {
 
-    // assert.is( coerce("0")            , );
-    // assert.is( coerce(+"0")           , );
-    // assert.is( coerce(Number("0"))    , );
-    // assert.is( coerce(new Number("0")), );
+    const coerce = x => x ? true : false ;
+
+    assert.is( coerce("0")            , true);
+    assert.is( coerce(+"0")           , false);
+    assert.is( coerce(Number("0"))    , false);
+    assert.is( coerce(new Number("0")), true);
 
 });
 
@@ -2410,20 +2417,20 @@ crazySuite.add("refactor", assert => {
 
 crazySuite.add("other", assert => {
 
-    // assert.is( "2" + 1,      );
-    // assert.is( "2" - 1,      );
-    // assert.is( "2" - - 1,    );
-    // assert.is( 1 + 2 + "3",  );
+    assert.is( "2" + 1, "21"     );
+    assert.is( "2" - 1,  1    );
+    assert.is( "2" - - 1, 3    );
+    assert.is( 1 + 2 + "3", "33" );
 
-    // assert.is( +true,        );
-    // assert.is( +false,       );
-    // assert.is( true + true,  );
-    // assert.is( [] == [],     );
-    // assert.is( [] == ![],    );
-    // assert.is( +[],          );
-    // assert.is( 2 == [2],     );
-    // assert.is( [] + {},      );
-    // assert.is( {} + [],      );
+    assert.is( +true,   1     );
+    assert.is( +false,  0     );
+    assert.is( true + true, 2  );
+    assert.is( [] == [],  false   );
+    assert.is( [] == ![],  true  );
+    assert.is( +[],  0        );
+    assert.is( 2 == [2], true    );
+    assert.is( [] + {},  "[object Object]"    );
+    // assert.is( {} + [],  0    );
 
 });
 
